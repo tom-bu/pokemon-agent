@@ -15,8 +15,8 @@
 ### 2. Clone the Repository
 
 ```bash
-git clone https://github.com/morph-labs/morphcloud-examples-public.git
-cd morphcloud-examples-public/pokemon-example
+git clone https://github.com/tom-bu/pokemon-agent.git
+cd pokemon-agent
 
 ```
 
