@@ -617,7 +617,7 @@ class PokemonAgent(Agent[Dict[str, Any], str, bool, str]):
                     "data": updated_state["screenshot"]
                 }
             })
-        log(LogLevel.WARNING, f"number of screenshots: {len(updated_state["screenshot"])}")
+        # log(LogLevel.WARNING, f"number of screenshots: {len(updated_state["screenshot"])}")
         
         # Add game state info if available
         # if updated_state["game_state"]:
