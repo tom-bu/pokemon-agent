@@ -506,7 +506,7 @@ class PokemonAgent(Agent[Dict[str, Any], str, bool, str]):
         self.pause_event = asyncio.Event()
         self.pause_event.set()  # Start unpaused
 
-        self.system_prompt = """describe the contents of the image and use that to achieve your objective"""
+        self.system_prompt = """describe the contents of the collision map and use that to achieve your objective"""
         
         log(LogLevel.INFO, f"Initialized PokemonAgent", 
             extra={"model": model_name, "max_tokens": max_tokens})
@@ -561,7 +561,7 @@ class PokemonAgent(Agent[Dict[str, Any], str, bool, str]):
         new_state = {
             "game_state": game_state.get("game_state", {}),
             "screenshot": screenshot_result.get("screenshot", ""),
-            "valid_moves": state.get('valid_moves', []),
+            "valid_moves": game_state.get("valid_moves", []),
             "last_action": state.get("last_action", "")
         }
         
@@ -608,21 +608,20 @@ class PokemonAgent(Agent[Dict[str, Any], str, bool, str]):
         })
         
         # Add screenshot if available
-        if updated_state["screenshot"]:
-            user_content.append({
-                "type": "image",
-                "source": {
-                    "type": "base64",
-                    "media_type": "image/png",
-                    "data": updated_state["screenshot"]
-                }
-            })
-        # log(LogLevel.WARNING, f"number of screenshots: {len(updated_state["screenshot"])}")
-        
+        # if updated_state["screenshot"]:
+        #     user_content.append({
+        #         "type": "image",
+        #         "source": {
+        #             "type": "base64",
+        #             "media_type": "image/png",
+        #             "data": updated_state["screenshot"]
+        #         }
+        #     })
+        # log(LogLevel.WARNING, f"number of screenshots: {len(updated_state.get('screenshot', ''))}")        
         # Add game state info if available
-        # if updated_state["game_state"]:
-        #     game_state_text = f"\nGame state information:\n{json.dumps(updated_state['game_state'], indent=2)}"
-        #     user_content.append({"type": "text", "text": game_state_text})
+        if updated_state["game_state"]:
+            game_state_text = f"\nGame state information:\n{json.dumps(updated_state['game_state'], indent=2)}"
+            user_content.append({"type": "text", "text": game_state_text})
         
 
         # Add valid moves if available

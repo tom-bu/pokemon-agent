@@ -184,7 +184,7 @@ class TaskDefinition:
 REGISTERED_TASKS = [
     TaskDefinition(
         id="enter-mt-moon",
-        instruction="Find Mount Moon entrance. Here's a hint, the entrance is on the right side of the pokemon center, but the entrance is the closest black spot in the middle. Rely on the a description of the screenshot. ",
+        instruction="Find Mount Moon entrance. Here's a hint, the entrance is on the right side of the pokemon center and is a single walkable tile among obstacles. Use the collision map from the game state. You should not have to walk down to find the entrance. you have to press up at that specific location to enter ",
         verification_fn_name="verify_enter_mount_moon",
         verification_message="Reach Mt. Moon.",
         metadata={"game": "Pokemon Red", "objective": "mount_moon"},
